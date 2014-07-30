@@ -9,7 +9,7 @@ using namespace std;
 int CAddrInfo::GetTriedBucket(const std::vector<unsigned char> &nKey) const
 {
     CDataStream ss1(SER_GETHASH, 0);
-    std::vector<unsigned char> vchKey = GetKey();s
+    std::vector<unsigned char> vchKey = GetKey();
     ss1 << nKey << vchKey;
     uint64_t hash1 = Hash(ss1.begin(), ss1.end()).Get64();
 
