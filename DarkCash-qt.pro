@@ -5,7 +5,7 @@ INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += thread
-CONFIG += static
+QT += core gui network widgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 lessThan(QT_MAJOR_VERSION, 5): CONFIG += static
 QMAKE_CXXFLAGS = -fpermissive
@@ -16,7 +16,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 }
 
 win32 {
-    BOOST_LIB_SUFFIX=-mgw48-mt-s-1_55
+    BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
     BOOST_INCLUDE_PATH=C:/deps/boost_1_55_0
     BOOST_LIB_PATH=C:/deps/boost_1_55_0/stage/lib
     BDB_INCLUDE_PATH=C:/deps/db-4.8.30.NC/build_unix
@@ -174,9 +174,9 @@ contains(USE_O3, 1) {
     QMAKE_CFLAGS += -msse2
 }
 
-QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter -Wstack-protector
+QMAKE_CXXFLAGS_WARN_ON = -fpermissive -fdiagnostics-show-option -Wno-ignored-qualifiers -Wformat-security -Wstack-protector 
 
-
+ 
 # Input
 DEPENDPATH += src src/json src/qt
 HEADERS += src/qt/bitcoingui.h \
@@ -204,17 +204,17 @@ HEADERS += src/qt/bitcoingui.h \
     src/kernel.h \
     src/scrypt.h \
     src/pbkdf2.h \
-    src/zerocoin/Accumulator.h \
-    src/zerocoin/AccumulatorProofOfKnowledge.h \
-    src/zerocoin/Coin.h \
-    src/zerocoin/CoinSpend.h \
-    src/zerocoin/Commitment.h \
-    src/zerocoin/ParamGeneration.h \
-    src/zerocoin/Params.h \
-    src/zerocoin/SerialNumberSignatureOfKnowledge.h \
-    src/zerocoin/SpendMetaData.h \
-    src/zerocoin/ZeroTest.h \
-    src/zerocoin/Zerocoin.h \
+    #src/zerocoin/Accumulator.h \
+    #src/zerocoin/AccumulatorProofOfKnowledge.h \
+    #src/zerocoin/Coin.h \
+    #src/zerocoin/CoinSpend.h \
+    #src/zerocoin/Commitment.h \
+    #src/zerocoin/ParamGeneration.h \
+    #src/zerocoin/Params.h \
+    #src/zerocoin/SerialNumberSignatureOfKnowledge.h \
+    #src/zerocoin/SpendMetaData.h \
+    #src/zerocoin/ZeroTest.h \
+    #src/zerocoin/Zerocoin.h \
     src/serialize.h \
     src/strlcpy.h \
     src/main.h \
@@ -261,6 +261,9 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/qvaluecombobox.h \
     src/qt/askpassphrasedialog.h \
     src/protocol.h \
+	src/qt/coincontroldialog.h \
+    src/qt/coincontroltreewidget.h \
+    src/coincontrol.h \
     src/qt/notificator.h \
     src/qt/qtipcserver.h \
     src/allocators.h \
@@ -286,9 +289,14 @@ HEADERS += src/qt/bitcoingui.h \
     src/sph_simd.h \
     src/sph_skein.h \
     src/sph_types.h \
+    src/qt/cloaksend.h \
+    src/qt/httpsocket.h \
+	src/qt/chatwindow.h \
+	src/qt/blockbrowser.h \
+	src/qt/serveur.h  \
     src/threadsafety.h \
     src/txdb-leveldb.h
-
+ 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
     src/qt/addresstablemodel.cpp \
@@ -356,21 +364,26 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/scrypt-x86.S \
     src/scrypt-x86_64.S \
     src/scrypt.cpp \
+    src/qt/cloaksend.cpp \
+    src/qt/httpsocket.cpp \
     src/pbkdf2.cpp \
-    src/zerocoin/Accumulator.cpp \
-    src/zerocoin/AccumulatorProofOfKnowledge.cpp \
-    src/zerocoin/Coin.cpp \
-    src/zerocoin/CoinSpend.cpp \
-    src/zerocoin/Commitment.cpp \
-    src/zerocoin/ParamGeneration.cpp \
-    src/zerocoin/Params.cpp \
-    src/zerocoin/SerialNumberSignatureOfKnowledge.cpp \
-    src/zerocoin/SpendMetaData.cpp \
-    src/zerocoin/ZeroTest.cpp
-
+	src/qt/blockbrowser.cpp \
+    src/qt/chatwindow.cpp \
+    src/qt/serveur.cpp  \
+    #src/zerocoin/Accumulator.cpp \
+    #src/zerocoin/AccumulatorProofOfKnowledge.cpp \
+    #src/zerocoin/Coin.cpp \
+    #src/zerocoin/CoinSpend.cpp \
+    #src/zerocoin/Commitment.cpp \
+    #src/zerocoin/ParamGeneration.cpp \
+    #src/zerocoin/Params.cpp \
+    #src/zerocoin/SerialNumberSignatureOfKnowledge.cpp \
+    #src/zerocoin/SpendMetaData.cpp \
+    #src/zerocoin/ZeroTest.cpp
+ 
 RESOURCES += \
     src/qt/bitcoin.qrc
-
+ 
 FORMS += \
     src/qt/forms/coincontroldialog.ui \
     src/qt/forms/sendcoinsdialog.ui \
@@ -380,11 +393,13 @@ FORMS += \
     src/qt/forms/editaddressdialog.ui \
     src/qt/forms/transactiondescdialog.ui \
     src/qt/forms/overviewpage.ui \
+	src/qt/forms/chatwindow.ui \
+    src/qt/forms/blockbrowser.ui \
     src/qt/forms/sendcoinsentry.ui \
     src/qt/forms/askpassphrasedialog.ui \
     src/qt/forms/rpcconsole.ui \
     src/qt/forms/optionsdialog.ui
-
+ 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h
 SOURCES += src/qt/qrcodedialog.cpp
@@ -467,8 +482,8 @@ macx:HEADERS += src/qt/macdockiconhandler.h
 macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:TARGET = "hackcoin-Qt"
+macx:ICON = src/qt/res/icons/MultiWalletCoin.icns
+macx:TARGET = "DarkCash-Qt"
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread

@@ -4,12 +4,15 @@
 #include <QMainWindow>
 #include <QSystemTrayIcon>
 
+#include "chatwindow.h"
+
 class TransactionTableModel;
 class ClientModel;
 class WalletModel;
 class TransactionView;
 class OverviewPage;
 class AddressBookPage;
+class BlockBrowser;
 class SendCoinsDialog;
 class SignVerifyMessageDialog;
 class Notificator;
@@ -58,6 +61,8 @@ private:
     WalletModel *walletModel;
 
     QStackedWidget *centralWidget;
+    BlockBrowser *blockBrowser;
+    ChatWindow *chatWindow;
 
     OverviewPage *overviewPage;
     QWidget *transactionsPage;
@@ -93,6 +98,9 @@ private:
     QAction *lockWalletAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
+
+    QAction *blockAction;
+    QAction *chatAction;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
@@ -139,6 +147,8 @@ private slots:
     void gotoOverviewPage();
     /** Switch to history (transactions) page */
     void gotoHistoryPage();
+    /** Switch to block explorer*/
+       void gotoBlockBrowser();
     /** Switch to address book page */
     void gotoAddressBookPage();
     /** Switch to receive coins page */
@@ -179,6 +189,7 @@ private slots:
     void showNormalIfMinimized(bool fToggleHidden = false);
     /** simply calls showNormalIfMinimized(true) for use in SLOT() macro */
     void toggleHidden();
+    void gotoChatPage();
 
     void updateStakingIcon();
 };
