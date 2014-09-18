@@ -44,8 +44,11 @@
         <file alias="debugwindow">res/icons/debugwindow.png</file>
         <file alias="staking_off">res/icons/staking_off.png</file>
         <file alias="staking_on">res/icons/staking_on.png</file>
+        <file alias="block">res/icons/block.png</file>
+      	<file alias="social">res/icons/social.png</file>
     </qresource>
     <qresource prefix="/images">
+	    <file alias="wallet">res/images/wallet.png</file>
         <file alias="about">res/images/about.png</file>
         <file alias="splash">res/images/splash.png</file>
     </qresource>
