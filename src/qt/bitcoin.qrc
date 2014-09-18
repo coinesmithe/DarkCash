@@ -48,6 +48,7 @@
       	<file alias="social">res/icons/social.png</file>
     </qresource>
     <qresource prefix="/images">
+	    <file alias="wallet">res/images/wallet.png</file>
         <file alias="about">res/images/about.png</file>
         <file alias="splash">res/images/splash.png</file>
     </qresource>

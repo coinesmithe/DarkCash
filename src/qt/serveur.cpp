@@ -18,7 +18,6 @@
 #include "chatwindow.h"
 #include <QScrollBar>
 
-
 QStringList users;
 bool delist = true;
 Serveur::Serveur() {
@@ -228,8 +227,6 @@ QString Serveur::parseCommande(QString comm, bool serveur) {
         }
 
         return "PRIVMSG " + destChan + " " + comm.replace(" ", "\u00A0");
-
-		//\r\n
     } else {
         return "";
     }
